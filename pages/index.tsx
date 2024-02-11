@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import type { Liff } from "@line/liff";
 import type { NextPage } from "next";
 import { usePathname } from "next/navigation";
