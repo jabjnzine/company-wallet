@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import type { DatePickerProps } from "antd";
 import { DatePicker } from "antd";
@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import axios from "axios";
 import config from "@/config";
+import { useRouter } from "next/navigation";
+
 const dateFormat = "YYYY-MM-DD";
 interface IncomeExpenseProps {
   someProp: string;
@@ -22,6 +24,8 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   const [date_to, setDateTo] = useState<any>(
     dayjs(new Date()).format(dateFormat)
   );
+  const { push } = useRouter();
+
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -46,6 +50,9 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   const onChangeTo: DatePickerProps["onChange"] = (date, dateString) => {
     setDateTo(dateString);
     // fetchData();
+  };
+  const selectMenu = (menu: any) => {
+    push(`/Transactions/${menu}`);
   };
   return (
     <div className="">
@@ -88,7 +95,10 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
             ประเภทรายการ
           </div>
         </div>
-        <div className="w-full h-14 p-3 bg-white rounded-2xl border border-gray-200 justify-start items-center gap-4 inline-flex">
+        <div
+          className="w-full h-14 p-3 bg-white rounded-2xl border border-gray-200 justify-start items-center gap-4 inline-flex"
+          onClick={() => selectMenu(`Income`)}
+        >
           <div className="p-1 bg-[#F5FBFF] rounded-lg justify-start items-start gap-2.5 flex">
             <div className="w-6 h-6 justify-center items-center flex ">
               <div className="w-6 h-6 relative">
@@ -111,7 +121,10 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
             </div>
           </div>
         </div>
-        <div className="w-full h-14 p-3 bg-white rounded-2xl border border-gray-200 justify-start items-center gap-4 inline-flex">
+        <div
+          className="w-full h-14 p-3 bg-white rounded-2xl border border-gray-200 justify-start items-center gap-4 inline-flex"
+          onClick={() => selectMenu(`Expenses`)}
+        >
           <div className="p-1 bg-[#F5FBFF] rounded-lg justify-start items-start gap-2.5 flex">
             <div className="w-6 h-6 justify-center items-center flex ">
               <div className="w-6 h-6 relative">
@@ -134,7 +147,10 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
             </div>
           </div>
         </div>
-        <div className="w-full h-14 p-3 bg-white rounded-2xl border border-gray-200 justify-start items-center gap-4 inline-flex">
+        <div
+          className="w-full h-14 p-3 bg-white rounded-2xl border border-gray-200 justify-start items-center gap-4 inline-flex"
+          onClick={() => selectMenu(`Profit`)}
+        >
           <div className="p-1 bg-[#F5FBFF] rounded-lg justify-start items-start gap-2.5 flex">
             <div className="w-6 h-6 justify-center items-center flex ">
               <div className="w-6 h-6 relative">

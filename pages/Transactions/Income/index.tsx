@@ -24,7 +24,7 @@ export default function Income() {
   return (
     <div>
       <div className=" w-full">
-        <div className="text-center text-slate-800 text-xl font-semibold flex justify-center items-center">
+        <div className="text-center text-slate-800 text-xl font-semibold flex justify-center items-center mt-4">
           สรุปรายการบัญชี
         </div>
         <div className="p-4">

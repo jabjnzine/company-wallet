@@ -3,7 +3,7 @@ export default function Expenses() {
   return (
     <div>
       <div className=" w-full">
-        <div className="text-center text-slate-800 text-xl font-semibold flex justify-center items-center">
+        <div className="text-center text-slate-800 text-xl font-semibold flex justify-center items-center mt-4">
           สรุปยอดรายจ่าย
         </div>
         <div className="p-4">

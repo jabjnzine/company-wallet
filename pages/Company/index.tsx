@@ -46,7 +46,7 @@ export default function Company() {
       <div className="w-[100%] justify-center items-center inline-flex mt-6 mb-6">
         <div className="grow shrink basis-0 flex-col justify-start items-start gap-1 inline-flex ml-6">
           <div>
-            <span className="text-white text-2xl font-semibold font-['Kanit'] leading-loose">
+            <span className="text-white text-2xl font-semibold  leading-loose">
               สวัสดีคุณ {profile.displayName}
             </span>
             <span className="text-sky-900 text-2xl font-bold font-['Roboto'] leading-loose">
@@ -54,7 +54,7 @@ export default function Company() {
               👋
             </span>
           </div>
-          <div className="text-white text-base font-normal font-['Kanit'] leading-normal">
+          <div className="text-white text-base font-normal  leading-normal">
             ยินดีต้อนรับ, เลือกบริษัทที่คุณต้องการ
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function Company() {
         <div className="text">
           <div className="justify-start items-center gap-2 inline-flex">
             <div className="w-1 h-5 bg-sky-500 rounded-sm" />
-            <div className="text-slate-800 text-base font-semibold font-['Kanit'] leading-normal">
+            <div className="text-slate-800 text-base font-semibold  leading-normal">
               บริษัทของฉัน
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function Company() {
                   height={32}
                 />
                 <div className="flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="text-slate-800 text-base font-normal font-['Kanit'] leading-normal">
+                  <div className="text-slate-800 text-base font-normal  leading-normal">
                     {item.label}
                   </div>
                 </div>
