@@ -40,7 +40,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
     } catch (error) {}
   };
   useEffect(() => {
-    // fetchData();
+    fetchData();
   }, [date_from, date_to, someProp, company_id]);
 
   const onChangeFrom: DatePickerProps["onChange"] = (date, dateString) => {
