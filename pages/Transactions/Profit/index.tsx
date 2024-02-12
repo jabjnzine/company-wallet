@@ -1,5 +1,6 @@
 import ProfitAgent from "@/components/Transactions/Profit/Agent";
 import ProfitProduct from "@/components/Transactions/Profit/Product";
+import useStore from "@/store/state";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
 import dayjs from "dayjs";
@@ -7,6 +8,7 @@ import "dayjs/locale/th";
 import buddhistEra from "dayjs/plugin/buddhistEra";
 dayjs.extend(buddhistEra);
 export default function Profit() {
+  const company = useStore((state: any) => state.company);
   const items_: TabsProps["items"] = [
     {
       key: "1",
@@ -43,7 +45,7 @@ export default function Profit() {
               </div>
             </div>
             <div className="w-[221px] text-white text-xs font-light  leading-[18px]">
-              บริษัท ทีทีดี โกลเบิล จำกัด
+              {company.label}
             </div>
             <div className="self-stretch h-[0.50px] bg-white"></div>
             <div className="self-stretch justify-center items-center gap-2 inline-flex">

@@ -1,9 +1,11 @@
 import ExpensesList from "@/components/Transactions/Expenses/Expenses";
+import useStore from "@/store/state";
 import dayjs from "dayjs";
 import "dayjs/locale/th";
 import buddhistEra from "dayjs/plugin/buddhistEra";
 dayjs.extend(buddhistEra);
 export default function Expenses() {
+  const company = useStore((state: any) => state.company);
   return (
     <div>
       <div className=" w-full">
@@ -22,7 +24,7 @@ export default function Expenses() {
             </div>
             <div>
               <div className="text-white text-xs font-light leading-[18px]">
-                บริษัท ทีทีดี โกลเบิล จำกัด
+                {company.label}
               </div>
             </div>
             <div className=" w-[100%] h-[0.50px] bg-white"></div>

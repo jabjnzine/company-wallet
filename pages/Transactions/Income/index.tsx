@@ -8,8 +8,9 @@ import dayjs from "dayjs";
 import "dayjs/locale/th";
 import buddhistEra from "dayjs/plugin/buddhistEra";
 dayjs.extend(buddhistEra);
- 
+
 export default function Income() {
+  const company = useStore((state: any) => state.company);
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
 
@@ -42,13 +43,12 @@ export default function Income() {
                 รายรับทั้งหมด
               </div>
               <div className="text-white text-xs font-light leading-[18px]">
-                ข้อมูล ณ วันที่{" "}
-                {dayjs().locale("th").format("DD MMM BBBB")}
+                ข้อมูล ณ วันที่ {dayjs().locale("th").format("DD MMM BBBB")}
               </div>
             </div>
             <div>
               <div className="text-white text-xs font-light leading-[18px]">
-                บริษัท ทีทีดี โกลเบิล จำกัด
+                {company.label}
               </div>
             </div>
             <div className=" w-[100%] h-[0.50px] bg-white"></div>
