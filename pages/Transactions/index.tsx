@@ -63,9 +63,9 @@ export default function Transactions() {
         <title>สรุปรายการบัญชี</title>
       </Head>
       <div className="bg-white w-full">
-        <div className=" w-full h-[110px] bg-gradient-to-r from-[#258AD8] to-[#85B7FE]">
+        <div className=" w-full h-[80px] bg-gradient-to-r from-[#258AD8] to-[#85B7FE]">
           <div className="text-center text-white text-xl font-semibold leading-[30px]  h-[56px] flex justify-center items-center">
-            สรุปรายการบัญชี
+            {/* สรุปรายการบัญชี */}
           </div>
         </div>
         <div className="ml-[16px] mr-[16px] w-100 h-[74px] bg-white rounded-[16px] shadow-md -mt-10 p-3">

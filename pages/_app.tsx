@@ -4,6 +4,8 @@ import type { AppProps } from "next/app";
 import type { Liff } from "@line/liff";
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import DesktopDevice from "@/components/DesktopDevice";
+import { isMobile } from "react-device-detect";
 function MyApp({ Component, pageProps }: AppProps) {
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
@@ -27,11 +29,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   pageProps.liff = liffObject;
   pageProps.liffError = liffError;
+  if (!isMobile) {
+    return <DesktopDevice></DesktopDevice>;
+  }
   return (
     <div>
-      <Head>
-        <meta name="theme-color" content="#4285f4" />
-      </Head>
       <Component {...pageProps} />
     </div>
   );

@@ -4,7 +4,6 @@ import type { NextPage } from "next";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import SplashScreen from "@/components/Splashscreen";
-
 const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   liff,
   liffError,
@@ -16,6 +15,7 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
   useEffect(() => {
     if (isLoading) return;
   }, [isLoading]);
+
   return (
     <div>
       {liff && <SplashScreen />}
