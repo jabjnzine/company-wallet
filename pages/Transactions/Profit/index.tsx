@@ -45,7 +45,7 @@ export default function Profit() {
               </div>
             </div>
             <div className="w-[221px] text-white text-xs font-light  leading-[18px]">
-              {company.label}
+              {company.label}{" "}
             </div>
             <div className="self-stretch h-[0.50px] bg-white"></div>
             <div className="self-stretch justify-center items-center gap-2 inline-flex">
