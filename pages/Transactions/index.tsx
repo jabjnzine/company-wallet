@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import { useState } from "react";
 import { Tabs } from "antd";
@@ -7,6 +7,8 @@ import { CreditCard, EqualSquare } from "lucide-react";
 import Deposit from "@/components/Transactions/Deposit";
 import IncomeExpense from "@/components/Transactions/IncomeExpense";
 import useStore from "../../store/state";
+import Head from "next/head";
+
 export default function Transactions() {
   const company = useStore((state: any) => state.company);
   const [activeTab, setActiveTab] = useState("incomeExpense"); // Default active tab
@@ -19,7 +21,6 @@ export default function Transactions() {
   const onChange = (key: string) => {
     // console.log(key);
   };
-
   const items: TabsProps["items"] = [
     {
       key: "1",
@@ -56,6 +57,9 @@ export default function Transactions() {
   ];
   return (
     <div>
+      <Head>
+        <title>สรุปรายการบัญชี</title>
+      </Head>
       <div className="bg-white w-full">
         <div className=" w-full h-[110px] bg-gradient-to-r from-[#258AD8] to-[#85B7FE]">
           <div className="text-center text-white text-xl font-semibold leading-[30px]  h-[56px] flex justify-center items-center">

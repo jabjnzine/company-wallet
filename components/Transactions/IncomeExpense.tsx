@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import config from "@/config";
 import { useRouter } from "next/navigation";
+import useStore from "../../store/state";
 
 const dateFormat = "YYYY-MM-DD";
 interface IncomeExpenseProps {
@@ -24,6 +25,9 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   const [date_to, setDateTo] = useState<any>(
     dayjs(new Date()).format(dateFormat)
   );
+  useStore.setState({ date_from: date_from });
+  useStore.setState({ date_to: date_to });
+
   const { push } = useRouter();
 
   const fetchData = async () => {
@@ -45,10 +49,14 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
 
   const onChangeFrom: DatePickerProps["onChange"] = (date, dateString) => {
     setDateFrom(dateString);
+    useStore.setState({ date_from: date_from });
+    useStore.setState({ date_to: date_to });
     // fetchData();
   };
   const onChangeTo: DatePickerProps["onChange"] = (date, dateString) => {
     setDateTo(dateString);
+    useStore.setState({ date_from: date_from });
+    useStore.setState({ date_to: date_to });
     // fetchData();
   };
   const selectMenu = (menu: any) => {
