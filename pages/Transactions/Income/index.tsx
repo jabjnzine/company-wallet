@@ -4,7 +4,11 @@ import IncomeProduct from "@/components/Transactions/Income/Product";
 import useStore from "@/store/state";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
-
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+import buddhistEra from "dayjs/plugin/buddhistEra";
+dayjs.extend(buddhistEra);
+ 
 export default function Income() {
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
@@ -35,10 +39,11 @@ export default function Income() {
           <div className="bg-gradient-to-r from-[#258AD8] to-[#85B7FE] rounded-lg  p-3 text-white space-y-2">
             <div className="flex justify-between ">
               <div className="text-white text-sm font-normal leading-snug">
-                รายรับทั้งหมด {date_from} {date_to}
+                รายรับทั้งหมด
               </div>
               <div className="text-white text-xs font-light leading-[18px]">
-                ข้อมูล ณ วันที่ 01 ม.ค. 2567
+                ข้อมูล ณ วันที่{" "}
+                {dayjs().locale("th").format("DD MMM BBBB")}
               </div>
             </div>
             <div>

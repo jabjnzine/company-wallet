@@ -2,6 +2,10 @@ import ProfitAgent from "@/components/Transactions/Profit/Agent";
 import ProfitProduct from "@/components/Transactions/Profit/Product";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+import buddhistEra from "dayjs/plugin/buddhistEra";
+dayjs.extend(buddhistEra);
 export default function Profit() {
   const items_: TabsProps["items"] = [
     {
@@ -35,7 +39,7 @@ export default function Profit() {
                 </div>
               </div>
               <div className="text-white text-xs font-light  leading-[18px]">
-                ข้อมูล ณ วันที่ 01 ม.ค. 2567
+                ข้อมูล ณ วันที่ {dayjs().locale("th").format("DD MMM BBBB")}
               </div>
             </div>
             <div className="w-[221px] text-white text-xs font-light  leading-[18px]">

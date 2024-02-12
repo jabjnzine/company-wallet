@@ -1,4 +1,8 @@
 import ExpensesList from "@/components/Transactions/Expenses/Expenses";
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+import buddhistEra from "dayjs/plugin/buddhistEra";
+dayjs.extend(buddhistEra);
 export default function Expenses() {
   return (
     <div>
@@ -13,7 +17,7 @@ export default function Expenses() {
                 รายจ่ายทั้งหมด
               </div>
               <div className="text-white text-xs font-light leading-[18px]">
-                ข้อมูล ณ วันที่ 01 ม.ค. 2567
+                ข้อมูล ณ วันที่ {dayjs().locale("th").format("DD MMM BBBB")}
               </div>
             </div>
             <div>
