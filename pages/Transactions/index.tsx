@@ -21,6 +21,7 @@ export default function Transactions() {
   const onChangeType = (key: string) => {
     useStore.setState({ type_date: key });
   };
+  const onChange = (key: string) => {};
   const items: TabsProps["items"] = [
     {
       key: "request_date",
