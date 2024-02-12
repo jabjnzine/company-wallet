@@ -8,7 +8,6 @@ import axios from "axios";
 import config from "@/config";
 import { useRouter } from "next/navigation";
 import useStore from "../../store/state";
-
 const dateFormat = "YYYY-MM-DD";
 interface IncomeExpenseProps {
   someProp: string;
@@ -25,9 +24,6 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   const [date_to, setDateTo] = useState<any>(
     dayjs(new Date()).format(dateFormat)
   );
-  useStore.setState({ date_from: date_from });
-  useStore.setState({ date_to: date_to });
-
   const { push } = useRouter();
 
   const fetchData = async () => {
