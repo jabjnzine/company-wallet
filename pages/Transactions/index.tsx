@@ -58,6 +58,16 @@ export default function Transactions() {
   return (
     <div>
       <Head>
+        <meta
+          name="theme-color"
+          content="#ecd96f"
+          media="(prefers-color-scheme: light)"
+        ></meta>
+        <meta
+          name="theme-color"
+          content="#0b3e05"
+          media="(prefers-color-scheme: dark)"
+        ></meta>
         <title>สรุปรายการบัญชี</title>
       </Head>
       <div className="bg-white w-full">
