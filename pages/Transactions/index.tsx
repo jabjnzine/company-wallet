@@ -18,12 +18,12 @@ export default function Transactions() {
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
-  const onChange = (key: string) => {
-    // console.log(key);
+  const onChangeType = (key: string) => {
+    useStore.setState({ type_date: key });
   };
   const items: TabsProps["items"] = [
     {
-      key: "1",
+      key: "request_date",
       label: "Participants Date",
       children: (
         <IncomeExpense
@@ -33,7 +33,7 @@ export default function Transactions() {
       ),
     },
     {
-      key: "2",
+      key: "booking_date",
       label: "Booking Date",
       children: (
         <IncomeExpense
@@ -93,9 +93,9 @@ export default function Transactions() {
         <div className="mt-[24px] ml-[16px] mr-[16px] ">
           {activeTab === `incomeExpense` && (
             <Tabs
-              defaultActiveKey="1"
+              defaultActiveKey="request_date"
               items={items}
-              onChange={onChange}
+              onChange={onChangeType}
               centered
             />
           )}

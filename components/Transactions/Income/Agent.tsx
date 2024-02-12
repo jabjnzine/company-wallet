@@ -1,12 +1,16 @@
-'use client'
+"use client";
+import useStore from "@/store/state";
 import Image from "next/image";
 export default function IncomeAgent() {
+  const date_from = useStore((state: any) => state.date_from);
+  const date_to = useStore((state: any) => state.date_to);
+  const type_date = useStore((state: any) => state.type_date);
   return (
     <div>
       <div className="justify-start items-center gap-2 inline-flex mb-4">
         <div className="w-1 h-5 bg-sky-500 rounded-sm" />
         <div className="text-slate-800 text-[16px] font-[600]  leading-normal">
-          รายการทั้งหมด
+          รายการทั้งหมด {date_from} {date_to} {type_date}
         </div>
       </div>
       <div className="space-y-2">
