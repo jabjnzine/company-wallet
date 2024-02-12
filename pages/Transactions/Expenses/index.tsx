@@ -24,7 +24,7 @@ export default function Expenses() {
             </div>
             <div>
               <div className="text-white text-xs font-light leading-[18px]">
-                {company.label}{" "}
+                {company?.label}{" "}
               </div>
             </div>
             <div className=" w-[100%] h-[0.50px] bg-white"></div>
