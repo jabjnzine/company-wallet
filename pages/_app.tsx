@@ -32,11 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   if (!isMobile) {
     return <DesktopDevice></DesktopDevice>;
   }
-  return (
-    <div>
-      <Component {...pageProps} />
-    </div>
-  );
+  return <Component {...pageProps} />;
 }
 
 export default MyApp;

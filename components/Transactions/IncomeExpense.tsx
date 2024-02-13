@@ -18,12 +18,9 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   company_id,
 }) => {
   const [sum_total, setSumTotal] = useState<any>();
-  const [date_from, setDateFrom] = useState<any>(
-    dayjs(new Date()).format(dateFormat)
-  );
-  const [date_to, setDateTo] = useState<any>(
-    dayjs(new Date()).format(dateFormat)
-  );
+  const date_from = useStore((state: any) => state.date_from);
+  const date_to = useStore((state: any) => state.date_to);
+
   const { push } = useRouter();
 
   const fetchData = async () => {
@@ -44,16 +41,10 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   }, [date_from, date_to, someProp, company_id]);
 
   const onChangeFrom: DatePickerProps["onChange"] = (date, dateString) => {
-    setDateFrom(dateString);
-    useStore.setState({ date_from: date_from });
-    useStore.setState({ date_to: date_to });
-    // fetchData();
+    useStore.setState({ date_from: dateString });
   };
   const onChangeTo: DatePickerProps["onChange"] = (date, dateString) => {
-    setDateTo(dateString);
-    useStore.setState({ date_from: date_from });
-    useStore.setState({ date_to: date_to });
-    // fetchData();
+    useStore.setState({ date_to: dateString });
   };
   const selectMenu = (menu: any) => {
     push(`/Transactions/${menu}`);
