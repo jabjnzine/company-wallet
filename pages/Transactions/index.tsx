@@ -12,6 +12,7 @@ import Head from "next/head";
 export default function Transactions() {
   const company = useStore((state: any) => state.company);
   const [activeTab, setActiveTab] = useState("incomeExpense"); // Default active tab
+
   if (!company || !company.company_id) {
     return <div>Loading or handle the absence of company data...</div>;
   }
@@ -109,26 +110,78 @@ export default function Transactions() {
             />
           )}
         </div>
-        <div className="btm-nav">
-          <button
-            className={
-              activeTab === "incomeExpense" ? "active text-[#0086C9]" : ""
-            }
-            onClick={() => handleTabClick("incomeExpense")}
-          >
-            {" "}
-            <CreditCard />
-            <span className="btm-nav-label">ยอดรายรับ-รายจ่าย</span>
-          </button>
-          <button
-            className={activeTab === "deposit" ? "active  text-[#0086C9]" : ""}
-            onClick={() => handleTabClick("deposit")}
-          >
-            {" "}
-            <EqualSquare />
-            <span className="btm-nav-label">ยอดมัดจำ</span>
-          </button>
+        <div className="grid grid-cols-2 fixed bottom-0 w-full  bg-white shadow-[#b6b6b6] shadow-lg p-4">
+          <div className="flex flex-col items-center">
+            <button
+              className={`mx-2 flex flex-col items-center ${
+                activeTab === "incomeExpense" ? "active text-[#0086C9]" : ""
+              }`}
+              onClick={() => handleTabClick("incomeExpense")}
+            >
+              {" "}
+              <CreditCard />
+              <span className="btm-nav-label">ยอดรายรับ-รายจ่าย</span>
+            </button>
+          </div>
+          <div className="flex flex-col items-center">
+            <button
+              className={`mx-2 flex flex-col items-center ${
+                activeTab === "deposit" ? "active text-[#0086C9]" : ""
+              }`}
+              onClick={() => handleTabClick("deposit")}
+            >
+              {" "}
+              <EqualSquare />
+              <span className="btm-nav-label">ยอดมัดจำ</span>
+            </button>
+          </div>
         </div>
+        {/* <div className="flex justify-between items-center fixed bottom-0 w-full bg-red-400">
+          <div className="bg-black w-full">
+            <button
+              className={`mx-2 flex flex-col items-center ${
+                activeTab === "incomeExpense" ? "active text-[#0086C9]" : ""
+              }`}
+              onClick={() => handleTabClick("incomeExpense")}
+            >
+              {" "}
+              <CreditCard />
+              <span className="btm-nav-label">ยอดรายรับ-รายจ่าย</span>
+            </button>
+          </div>
+          <div>
+            <button
+              className={`mx-2 flex flex-col items-center ${
+                activeTab === "deposit" ? "active text-[#0086C9]" : ""
+              }`}
+              onClick={() => handleTabClick("deposit")}
+            >
+              {" "}
+              <EqualSquare />
+              <span className="btm-nav-label">ยอดมัดจำ</span>
+            </button>
+          </div>
+        </div> */}
+        {/* <div className="w-full h-[98px] px-6 pt-3 bg-white shadow flex-col justify-start items-center inline-flex fixed bottom-0">
+          <div className="self-stretch justify-center items-end inline-flex">
+            <div className="w-full p-1 rounded-sm flex-col justify-center items-center inline-flex">
+              <div className="w-6 h-6 justify-center items-center inline-flex">
+                <div className="w-6 h-6 relative"></div>
+              </div>
+              <div className="text-center text-black text-xs font-medium font-['Kanit'] leading-tight">
+                ยอดรายรับ-รายจ่าย
+              </div>
+            </div>
+            <div className="w-full p-1 rounded-sm flex-col justify-center items-center inline-flex">
+              <div className="w-6 h-6 justify-center items-center inline-flex">
+                <div className="w-6 h-6 relative"></div>
+              </div>
+              <div className="text-center text-black text-opacity-20 text-xs font-medium font-['Kanit'] leading-tight">
+                ยอดมัดจำ
+              </div>
+            </div>
+          </div>
+        </div> */}
       </div>
     </div>
   );

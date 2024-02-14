@@ -8,6 +8,16 @@ import axios from "axios";
 import config from "@/config";
 import { useRouter } from "next/navigation";
 import useStore from "../../store/state";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { Button } from "@/components/ui/button";
 const dateFormat = "YYYY-MM-DD";
 interface IncomeExpenseProps {
   someProp: string;
@@ -20,6 +30,8 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   const [sum_total, setSumTotal] = useState<any>();
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
   const thbFormatter = new Intl.NumberFormat("th-TH", {
     style: "decimal",
     maximumFractionDigits: 2,
@@ -59,6 +71,31 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
         <div className="grid grid-cols-2 gap-4 mt-3">
           <div>
             <div>จาก </div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-[240px] pl-3 text-left font-normal",
+                    !date && "text-muted-foreground"
+                  )}
+                >
+                  {date ? format(date, "yyyy-MM-dd") : <span>Pick a date</span>}
+                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  disabled={(date: any) =>
+                    date > new Date() || date < new Date("1900-01-01")
+                  }
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
             <div className="mt-1">
               <DatePicker
                 onChange={onChangeFrom}
