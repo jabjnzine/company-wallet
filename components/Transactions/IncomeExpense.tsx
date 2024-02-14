@@ -20,7 +20,10 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   const [sum_total, setSumTotal] = useState<any>();
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
-
+  const thbFormatter = new Intl.NumberFormat("th-TH", {
+    style: "decimal",
+    maximumFractionDigits: 2,
+  });
   const { push } = useRouter();
 
   const fetchData = async () => {
@@ -28,12 +31,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
       const response = await axios.get(
         `${config.API_HOST}/dashboards/company-wallet/main?date_start=${date_from}&date_end=${date_to}&company_id=${company_id}&date_type=${someProp}`
       );
-      const format = {
-        sumCostTotal: response.data.sumCostTotal.toLocaleString("en-US"),
-        sumIncomeTotal: response.data.sumIncomeTotal.toLocaleString("en-US"),
-        sumProfitTotal: response.data.sumProfitTotal.toLocaleString("en-US"),
-      };
-      setSumTotal(format);
+      setSumTotal(response.data);
     } catch (error) {}
   };
   useEffect(() => {
@@ -112,7 +110,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
               รายรับทั้งหมด
             </div>
             <div className="text-[14px] text-[#36BFFA] font-[500]">
-              {sum_total?.sumIncomeTotal} บาท
+              {thbFormatter.format(sum_total?.sumIncomeTotal)} บาท
             </div>
           </div>
         </div>
@@ -138,7 +136,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
               รายจ่ายทั้งหมด
             </div>
             <div className="text-[14px] text-[#F97066] font-[500]">
-              {sum_total?.sumCostTotal} บาท
+              {thbFormatter.format(sum_total?.sumCostTotal)} บาท
             </div>
           </div>
         </div>
@@ -164,7 +162,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
               กำไรขั้นต้น
             </div>
             <div className="text-[14px] text-[#32D583] font-[500]">
-              {sum_total?.sumProfitTotal} บาท
+              {thbFormatter.format(sum_total?.sumProfitTotal)} บาท
             </div>
           </div>
         </div>

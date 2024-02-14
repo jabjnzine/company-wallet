@@ -10,6 +10,10 @@ export default function IncomeAgent() {
   const type_date = useStore((state: any) => state.type_date);
   const company = useStore((state: any) => state.company);
   const [agents, setAgents] = useState<any[]>([]);
+  const thbFormatter = new Intl.NumberFormat("th-TH", {
+    style: "decimal",
+    maximumFractionDigits: 2,
+  });
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -50,7 +54,7 @@ export default function IncomeAgent() {
             </div>
           </div>
         ) : (
-          <div>
+          <div className="space-y-2">
             {agents.map((item: any, index: number) => (
               <div
                 key={index}
@@ -71,7 +75,7 @@ export default function IncomeAgent() {
                     ยอดรายรับ
                   </div>
                   <div className="text-black  text-base font-semibold leading-normal">
-                    {item.total.toLocaleString("en-US")} บาท
+                    {thbFormatter.format(item.total)} บาท
                   </div>
                 </div>
                 <div className="flex justify-between">
@@ -79,7 +83,7 @@ export default function IncomeAgent() {
                     ยอดจ่ายแล้ว
                   </div>
                   <div className="text-center text-emerald-400 text-sm font-medium leading-tight">
-                    {item.totalprice_success.toLocaleString("en-US")} บาท
+                    {thbFormatter.format(item.totalprice_success)} บาท
                   </div>
                 </div>
                 <div className="flex justify-between">
@@ -87,7 +91,7 @@ export default function IncomeAgent() {
                     ยอดค้างจ่าย
                   </div>
                   <div className="text-center text-red-400 text-sm font-medium  leading-tight">
-                    {item.totalprice_pending.toLocaleString("en-US")} บาท
+                    {thbFormatter.format(item.totalprice_pending)} บาท
                   </div>
                 </div>
               </div>

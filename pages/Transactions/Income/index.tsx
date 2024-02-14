@@ -7,13 +7,20 @@ import type { TabsProps } from "antd";
 import dayjs from "dayjs";
 import "dayjs/locale/th";
 import buddhistEra from "dayjs/plugin/buddhistEra";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import config from "@/config";
 dayjs.extend(buddhistEra);
-
 export default function Income() {
-  const company = useStore((state: any) => state.company);
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
-
+  const type_date = useStore((state: any) => state.type_date);
+  const company = useStore((state: any) => state.company);
+  const [summary, setSummary] = useState<any>();
+  const thbFormatter = new Intl.NumberFormat("th-TH", {
+    style: "decimal",
+    maximumFractionDigits: 2,
+  });
   const items_: TabsProps["items"] = [
     {
       key: "1",
@@ -29,7 +36,19 @@ export default function Income() {
   const onChange = (key: string) => {
     // console.log(key);
   };
-
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${config.API_HOST}/dashboards/company-wallet/main-income?date_start=${date_from}&date_end=${date_to}&company_id=${company.company_id}&date_type=${type_date}`
+      );
+      setSummary(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div>
       <div className=" w-full">
@@ -53,7 +72,7 @@ export default function Income() {
             </div>
             <div className=" w-[100%] h-[0.50px] bg-white"></div>
             <div className=" flex justify-center text-white text-xl font-semibold leading-[30px]">
-              3,104,801.00 บาท
+              {thbFormatter.format(summary?.sumTotal)} บาท
             </div>
             <div>
               <div className="flex justify-between">
@@ -61,7 +80,7 @@ export default function Income() {
                   ยอดจ่ายแล้ว
                 </div>
                 <div className="text-center text-white text-sm font-medium  leading-tight">
-                  2,104,801.00 บาท
+                  {thbFormatter.format(summary?.sumSuccessTotal)} บาท
                 </div>
               </div>
             </div>
@@ -71,7 +90,7 @@ export default function Income() {
                   ยอดค้างจ่าย
                 </div>
                 <div className="text-center text-white text-sm font-medium  leading-tight">
-                  1,000,000.00 บาท
+                  {thbFormatter.format(summary?.sumPendingTotal)} บาท
                 </div>
               </div>
             </div>
