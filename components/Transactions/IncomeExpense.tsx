@@ -28,10 +28,10 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   company_id,
 }) => {
   const [sum_total, setSumTotal] = useState<any>();
-  const date_from = useStore((state: any) => state.date_from);
-  const date_to = useStore((state: any) => state.date_to);
-  const [date, setDate] = useState<Date | undefined>(new Date());
-
+  // const date_from = useStore((state: any) => state.date_from);
+  // const date_to = useStore((state: any) => state.date_to);
+  const [date_from, setDateFrom] = useState<Date | undefined>(new Date());
+  const [date_to, setDateTo] = useState<Date | undefined>(new Date());
   const thbFormatter = new Intl.NumberFormat("th-TH", {
     style: "decimal",
     maximumFractionDigits: 2,
@@ -41,21 +41,20 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${config.API_HOST}/dashboards/company-wallet/main?date_start=${date_from}&date_end=${date_to}&company_id=${company_id}&date_type=${someProp}`
+        `${config.API_HOST}/dashboards/company-wallet/main?date_start=${dayjs(
+          date_from
+        ).format(dateFormat)}&date_end=${dayjs(date_to).format(
+          dateFormat
+        )}&company_id=${company_id}&date_type=${someProp}`
       );
       setSumTotal(response.data);
     } catch (error) {}
   };
   useEffect(() => {
+    useStore.setState({ date_from: dayjs(date_from).format(dateFormat) });
+    useStore.setState({ date_to: dayjs(date_to).format(dateFormat) });
     fetchData();
   }, [date_from, date_to, someProp, company_id]);
-
-  const onChangeFrom: DatePickerProps["onChange"] = (date, dateString) => {
-    useStore.setState({ date_from: dateString });
-  };
-  const onChangeTo: DatePickerProps["onChange"] = (date, dateString) => {
-    useStore.setState({ date_to: dateString });
-  };
   const selectMenu = (menu: any) => {
     push(`/Transactions/${menu}`);
   };
@@ -71,49 +70,64 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
         <div className="grid grid-cols-2 gap-4 mt-3">
           <div>
             <div>จาก </div>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-[240px] pl-3 text-left font-normal",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  {date ? format(date, "yyyy-MM-dd") : <span>Pick a date</span>}
-                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  disabled={(date: any) =>
-                    date > new Date() || date < new Date("1900-01-01")
-                  }
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
             <div className="mt-1">
-              <DatePicker
-                onChange={onChangeFrom}
-                className="w-[100%]"
-                defaultValue={dayjs(date_from)}
-                format={dateFormat}
-              />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "w-full pl-3 text-left font-normal h-8",
+                      !date_from && "text-muted-foreground"
+                    )}
+                  >
+                    {date_from ? (
+                      format(date_from, "yyyy-MM-dd")
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={date_from}
+                    onSelect={setDateFrom}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
           <div>
             <div>ถึง </div>
             <div className="mt-1">
-              <DatePicker
-                onChange={onChangeTo}
-                className="w-[100%]"
-                defaultValue={dayjs(date_to)}
-                format={dateFormat}
-              />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "w-full pl-3 text-left font-normal h-8",
+                      !date_to && "text-muted-foreground"
+                    )}
+                  >
+                    {date_to ? (
+                      format(date_to, "yyyy-MM-dd")
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={date_to}
+                    onSelect={setDateTo}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         </div>
