@@ -3,7 +3,6 @@ import Image from "next/image";
 import type { DatePickerProps } from "antd";
 import { DatePicker } from "antd";
 import { useEffect, useState } from "react";
-import dayjs from "dayjs";
 import axios from "axios";
 import config from "@/config";
 import { useRouter } from "next/navigation";
@@ -18,7 +17,9 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
 const dateFormat = "YYYY-MM-DD";
+
 interface IncomeExpenseProps {
   someProp: string;
   company_id: string;
@@ -27,17 +28,15 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
   someProp,
   company_id,
 }) => {
-  const [sum_total, setSumTotal] = useState<any>();
-  // const date_from = useStore((state: any) => state.date_from);
-  // const date_to = useStore((state: any) => state.date_to);
-  const [date_from, setDateFrom] = useState<Date | undefined>(new Date());
-  const [date_to, setDateTo] = useState<Date | undefined>(new Date());
   const thbFormatter = new Intl.NumberFormat("th-TH", {
     style: "decimal",
     maximumFractionDigits: 2,
   });
-  const { push } = useRouter();
+  const [sum_total, setSumTotal] = useState<any>();
+  const { date_from, setDateFrom } = useStore();
+  const { date_to, setDateTo } = useStore();
 
+  const { push } = useRouter();
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -51,8 +50,6 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
     } catch (error) {}
   };
   useEffect(() => {
-    useStore.setState({ date_from: dayjs(date_from).format(dateFormat) });
-    useStore.setState({ date_to: dayjs(date_to).format(dateFormat) });
     fetchData();
   }, [date_from, date_to, someProp, company_id]);
   const selectMenu = (menu: any) => {
@@ -92,7 +89,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
                   <Calendar
                     mode="single"
                     selected={date_from}
-                    onSelect={setDateFrom}
+                    onSelect={(newDate: any) => setDateFrom(newDate)}
                     initialFocus
                   />
                 </PopoverContent>
@@ -123,7 +120,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
                   <Calendar
                     mode="single"
                     selected={date_to}
-                    onSelect={setDateTo}
+                    onSelect={(newDate: any) => setDateTo(newDate)}
                     initialFocus
                   />
                 </PopoverContent>

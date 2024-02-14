@@ -10,6 +10,7 @@ import buddhistEra from "dayjs/plugin/buddhistEra";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import config from "@/config";
+const dateFormat = "YYYY-MM-DD";
 dayjs.extend(buddhistEra);
 export default function Income() {
   const date_from = useStore((state: any) => state.date_from);
@@ -39,7 +40,13 @@ export default function Income() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${config.API_HOST}/dashboards/company-wallet/main-income?date_start=${date_from}&date_end=${date_to}&company_id=${company.company_id}&date_type=${type_date}`
+        `${
+          config.API_HOST
+        }/dashboards/company-wallet/main-income?date_start=${dayjs(
+          date_from
+        ).format(dateFormat)}&date_end=${dayjs(date_to).format(
+          dateFormat
+        )}&company_id=${company.company_id}&date_type=${type_date}`
       );
       setSummary(response.data);
     } catch (error) {

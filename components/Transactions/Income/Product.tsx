@@ -4,6 +4,8 @@ import Image from "next/image";
 import axios from "axios";
 import config from "@/config";
 import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+const dateFormat = "YYYY-MM-DD";
 export default function IncomeProduct() {
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
@@ -17,7 +19,13 @@ export default function IncomeProduct() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${config.API_HOST}/dashboards/company-wallet/main-product?date_start=${date_from}&date_end=${date_to}&company_id=${company.company_id}&date_type=${type_date}`
+        `${
+          config.API_HOST
+        }/dashboards/company-wallet/main-product?date_start=${dayjs(
+          date_from
+        ).format(dateFormat)}&date_end=${dayjs(date_to).format(
+          dateFormat
+        )}&company_id=${company.company_id}&date_type=${type_date}`
       );
       setProducts(response.data);
     } catch (error) {}
