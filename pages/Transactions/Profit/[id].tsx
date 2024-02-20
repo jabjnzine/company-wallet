@@ -57,7 +57,7 @@ export default function ProfitDetail() {
     <div className=" bg-gray-100 h-dvh">
       <div className="bg-white">
         <div className="text-center text-slate-800 text-xl font-semibold flex justify-center items-center mt-4">
-          รายละเอียดรายรับ {type_profit}
+          รายละเอียดกำไร
         </div>
         <div className="p-4">
           <div className="justify-start items-center gap-2 inline-flex mb-4">
@@ -146,7 +146,7 @@ export default function ProfitDetail() {
                   </div>
                 </div>
                 <div className=" text-white text-sm font-semibold  leading-snug">
-                ยอดกำไร
+                  ยอดกำไร
                 </div>
               </div>
               <div className="text-right text-white text-base font-semibold leading-normal">
