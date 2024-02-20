@@ -88,7 +88,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
-                    selected={date_from}
+                    selected={date_from ?? new Date()}
                     onSelect={(newDate: any) => setDateFrom(newDate)}
                     initialFocus
                   />
@@ -119,7 +119,7 @@ const IncomeExpense: React.FC<IncomeExpenseProps> = ({
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
-                    selected={date_to}
+                    selected={date_to ?? new Date()}
                     onSelect={(newDate: any) => setDateTo(newDate)}
                     initialFocus
                   />

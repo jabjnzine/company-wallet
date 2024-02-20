@@ -10,9 +10,9 @@ import buddhistEra from "dayjs/plugin/buddhistEra";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import config from "@/config";
-const dateFormat = "YYYY-MM-DD";
 dayjs.extend(buddhistEra);
 export default function Income() {
+  const dateFormat = "YYYY-MM-DD";
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
   const type_date = useStore((state: any) => state.type_date);
