@@ -16,6 +16,7 @@ export default function Profit() {
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
   const type_date = useStore((state: any) => state.type_date);
+  const type_profit = useStore((state: any) => state.type_profit);
   const company = useStore((state: any) => state.company);
   const [summary, setSummary] = useState<any>();
   const thbFormatter = new Intl.NumberFormat("th-TH", {
@@ -89,7 +90,7 @@ export default function Profit() {
         </div>
         <div className="mt-4">
           <Tabs
-            defaultActiveKey="1"
+            defaultActiveKey={type_profit}
             items={items_}
             onChange={onChange}
             centered
