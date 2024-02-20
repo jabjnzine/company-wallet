@@ -24,18 +24,18 @@ export default function Income() {
   });
   const items_: TabsProps["items"] = [
     {
-      key: "1",
+      key: "agent",
       label: "Agent",
       children: <IncomeAgent />,
     },
     {
-      key: "2",
+      key: "product",
       label: "Product",
       children: <IncomeProduct />,
     },
   ];
   const onChange = (key: string) => {
-    // console.log(key);
+    useStore.setState({ type_income: key });
   };
   const fetchData = async () => {
     try {
@@ -104,7 +104,7 @@ export default function Income() {
           </div>
           <div className="mt-4">
             <Tabs
-              defaultActiveKey="1"
+              defaultActiveKey="agent"
               items={items_}
               onChange={onChange}
               centered

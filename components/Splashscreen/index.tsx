@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
 export default function SplashScreen() {
   const [isMounted, setIsMounted] = useState(false);
@@ -43,10 +44,13 @@ export default function SplashScreen() {
         <div>
           {isMounted && !isLoggin ? (
             <Link href="https://liff.line.me/2002826542-rmqzgK14">
-              <button className="btn  btn-ghost border-[#2F4B67] w-[327px]  h-[48px] rounded-[8px] p-[12px]">
-                <Image alt="line" src="/favicon.ico" width={20} height={20} />
+              <Button
+                variant={"outline"}
+                className="border-[#2F4B67] w-[327px]  h-[48px] rounded-[8px] p-[12px]"
+              >
+                <Image alt="line" src="/favicon.ico" width={20} height={20} className="mr-2"/>
                 เข้าสู่ระบบด้วยบัญชี Line
-              </button>
+              </Button>
             </Link>
           ) : null}
         </div>

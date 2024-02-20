@@ -5,8 +5,11 @@ import axios from "axios";
 import config from "@/config";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 const dateFormat = "YYYY-MM-DD";
+
 export default function IncomeAgent() {
+  const { push } = useRouter();
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
   const type_date = useStore((state: any) => state.type_date);
@@ -29,6 +32,11 @@ export default function IncomeAgent() {
       );
       setAgents(response.data);
     } catch (error) {}
+  };
+
+  const selectItem = async (item: any) => {
+    console.log("item", item);
+    push(`/Transactions/Income/${item.agent_id_ref}`);
   };
   useEffect(() => {
     fetchData();
@@ -65,6 +73,7 @@ export default function IncomeAgent() {
           <div className="space-y-2">
             {agents.map((item: any, index: number) => (
               <div
+                onClick={() => selectItem(item)}
                 key={index}
                 className="rounded-lg border border-gray-200 p-3 space-y-2"
               >

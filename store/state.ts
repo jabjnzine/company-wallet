@@ -11,6 +11,7 @@ import { create } from 'zustand'
 interface DateStore {
     company: string | null,
     type_date: string | null,
+    type_income: string | null,
     date_from: Date | null;
     date_to: Date | null;
     setDateFrom: (newDate: Date) => void;
@@ -22,7 +23,8 @@ const useStore = create<DateStore>((set) => ({
     date_to: new Date(),
     setDateFrom: (newDate) => set({ date_from: newDate }),
     setDateTo: (newDate) => set({ date_to: newDate }),
-    type_date: `request_date`
+    type_date: `request_date`,
+    type_income: `agent`,
 
 }));
 
