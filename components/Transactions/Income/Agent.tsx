@@ -6,10 +6,10 @@ import config from "@/config";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-const dateFormat = "YYYY-MM-DD";
 
 export default function IncomeAgent() {
   const { push } = useRouter();
+  const dateFormat = "YYYY-MM-DD";
   const date_from = useStore((state: any) => state.date_from);
   const date_to = useStore((state: any) => state.date_to);
   const type_date = useStore((state: any) => state.type_date);
@@ -35,7 +35,6 @@ export default function IncomeAgent() {
   };
 
   const selectItem = async (item: any) => {
-    console.log("item", item);
     push(`/Transactions/Income/${item.agent_id_ref}`);
   };
   useEffect(() => {
