@@ -13,6 +13,8 @@ interface DateStore {
     type_date: string | null,
     type_income: string | null,
     type_profit: string | null,
+    type_deposit: string | null,
+    debtor_sub_id: number | null,
     date_from: Date | null;
     date_to: Date | null;
     setDateFrom: (newDate: Date) => void;
@@ -27,6 +29,8 @@ const useStore = create<DateStore>((set) => ({
     type_date: `request_date`,
     type_income: `agent`,
     type_profit: `agent`,
+    type_deposit: `agent`,
+    debtor_sub_id: null
 
 }));
 

@@ -11,6 +11,8 @@ import Head from "next/head";
 
 export default function Transactions() {
   const company = useStore((state: any) => state.company);
+  const type_deposit = useStore((state: any) => state.type_deposit);
+  const type_date = useStore((state: any) => state.type_date);
   const [activeTab, setActiveTab] = useState("incomeExpense"); // Default active tab
 
   if (!company || !company.company_id) {
@@ -22,7 +24,9 @@ export default function Transactions() {
   const onChangeType = (key: string) => {
     useStore.setState({ type_date: key });
   };
-  const onChange = (key: string) => {};
+  const onChange = (key: string) => {
+    useStore.setState({ type_deposit: key });
+  };
   const items: TabsProps["items"] = [
     {
       key: "request_date",
@@ -47,12 +51,12 @@ export default function Transactions() {
   ];
   const items_: TabsProps["items"] = [
     {
-      key: "1",
+      key: "supplier",
       label: "เจ้าหนี้ (Supplier)",
       children: <Deposit someProp="รายการเจ้าหนี้" />,
     },
     {
-      key: "2",
+      key: "agent",
       label: "ลูกหนี้ (Agent)",
       children: <Deposit someProp="รายการลูกหนี้" />,
     },
@@ -95,7 +99,7 @@ export default function Transactions() {
         <div className="mt-[24px] ml-[16px] mr-[16px] ">
           {activeTab === `incomeExpense` && (
             <Tabs
-              defaultActiveKey="request_date"
+              defaultActiveKey={type_date}
               items={items}
               onChange={onChangeType}
               centered
@@ -103,7 +107,7 @@ export default function Transactions() {
           )}
           {activeTab === `deposit` && (
             <Tabs
-              defaultActiveKey="1"
+              defaultActiveKey={type_deposit}
               items={items_}
               onChange={onChange}
               centered
