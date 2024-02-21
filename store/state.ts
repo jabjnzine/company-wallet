@@ -29,7 +29,7 @@ const useStore = create<DateStore>((set) => ({
     type_date: `request_date`,
     type_income: `agent`,
     type_profit: `agent`,
-    type_deposit: `agent`,
+    type_deposit: `supplier`,
     debtor_sub_id: null
 
 }));

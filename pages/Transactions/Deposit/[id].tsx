@@ -164,7 +164,8 @@ export default function DepositDetail() {
                                 </div>
                               </div>
                               <div className="text-red-400 text-base font-semibold  leading-normal">
-                                300,000.00 บาท
+                                {Formatter.format(item.outgoing_transactions)}{" "}
+                                บาท{" "}
                               </div>
                             </div>
                           </div>
@@ -173,7 +174,9 @@ export default function DepositDetail() {
                               วันที่ทำรายการ
                             </div>
                             <div className="text-center text-gray-400 text-sm font-normal  leading-snug">
-                              28 ม.ค. 2566
+                              {dayjs(item.create_date)
+                                .locale("th")
+                                .format("DD MMM BBBB")}
                             </div>
                           </div>
                         </div>
