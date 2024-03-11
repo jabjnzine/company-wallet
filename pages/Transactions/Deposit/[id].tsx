@@ -163,7 +163,7 @@ export default function DepositDetail() {
                                   />
                                 </div>
                               </div>
-                              <div className="text-red-400 text-base font-semibold  leading-normal">
+                              <div className="text-red-400  text-base font-semibold  leading-normal">
                                 {Formatter.format(item.outgoing_transactions)}{" "}
                                 บาท{" "}
                               </div>
